@@ -20,9 +20,9 @@ object Document extends ModelCompanion[Document, ObjectId] {
 	val collection = mongoCollection("documents")
 	val dao = new SalatDAO[Document, ObjectId](collection = collection) {}
 	
-	def apply(js: JsValue): Document = {
-	  Document(
-		title = (js \ "title").as[String],
-        body = (js \ "body").as[String])
+	def serialize(d: Document) = {
+	  Map("id" -> d.id.toString,
+	      "title" -> d.title,
+	      "body" -> d.body)
 	}
 }
