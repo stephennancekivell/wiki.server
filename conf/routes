@@ -8,6 +8,7 @@ GET     /documents                  controllers.DocumentCtrl.allDocuments
 GET     /documents/:id              controllers.DocumentCtrl.getDocument(id: String)
 POST	/documents					controllers.DocumentCtrl.newDocument
 PUT     /documents/:id              controllers.DocumentCtrl.updateDocument(id: String)
+DELETE  /documents/:id              controllers.DocumentCtrl.deleteDocument(id: String)
 
 
 # Map static resources from the /public folder to the /assets URL path

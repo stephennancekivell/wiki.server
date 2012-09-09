@@ -55,4 +55,14 @@ object DocumentCtrl extends Controller {
       case _ => BadRequest("invalid json data")
     }
   }
+  
+  def deleteDocument(id: String) = Action { request =>
+    Document.findOneById(new ObjectId(id)) match {
+      case Some(doc) => {
+        Document.remove(doc)
+        Ok("Deleted "+id)
+      }
+      case _ => BadRequest("bad id")
+    }
+  }
 }
