@@ -8,6 +8,7 @@ import com.novus.salat.dao._
 import com.mongodb.casbah.Imports._
 import se.radley.plugin.salat._
 import models.mongoContext._
+import play.api.libs.json.JsValue
 
 case class Document(
 	id: ObjectId = new ObjectId,
@@ -18,4 +19,10 @@ case class Document(
 object Document extends ModelCompanion[Document, ObjectId] {
 	val collection = mongoCollection("documents")
 	val dao = new SalatDAO[Document, ObjectId](collection = collection) {}
+	
+	def apply(js: JsValue): Document = {
+	  Document(
+		title = (js \ "title").as[String],
+        body = (js \ "body").as[String])
+	}
 }
